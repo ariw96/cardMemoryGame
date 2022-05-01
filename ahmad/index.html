@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Memory Game</title>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header><h1>Welcome to our Memory Game</h1></header>
+    <section class="main">
+      <nav>
+        <h3 class="correct">Correct Guesses:0</h3>
+        <h3 class="wrong">Wrong Guesses:0</h3>
+        <h3 class="score">Score:0</h3>
+        <h3 class="high-score">High Score:0</h3>
+      </nav>
+      <section class="memory-game">
+        <div class="memory-card" data-framework="fly">
+          <img class="front-face" src="./img/fly.jpg" alt="fly" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+        <div class="memory-card" data-framework="fly">
+          <img class="front-face" src="./img/fly.jpg" alt="fly" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+
+        <div class="memory-card" data-framework="forest">
+          <img class="front-face" src="./img/forest.jpg" alt="forest" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+        <div class="memory-card" data-framework="forest">
+          <img class="front-face" src="img/forest.jpg" alt="forest" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+
+        <div class="memory-card" data-framework="good view">
+          <img class="front-face" src="./img/good view.jpg" alt="good view" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+        <div class="memory-card" data-framework="good view">
+          <img class="front-face" src="./img/good view.jpg" alt="good view" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+
+        <div class="memory-card" data-framework="heart">
+          <img class="front-face" src="./img/heart.jpg" alt="heart" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+        <div class="memory-card" data-framework="heart">
+          <img class="front-face" src="./img/heart.jpg" alt="heart" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+
+        <div class="memory-card" data-framework="sea">
+          <img class="front-face" src="./img/sea.jpg" alt="sea" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+        <div class="memory-card" data-framework="sea">
+          <img class="front-face" src="./img/sea.jpg" alt="sea" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+
+        <div class="memory-card" data-framework="sunrise">
+          <img class="front-face" src="./img/sunrise.jpg" alt="sunrise" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+        <div class="memory-card" data-framework="sunrise">
+          <img class="front-face" src="./img/sunrise.jpg" alt="sunrise" />
+          <img
+            class="back-face"
+            src="./img/card-back.jpg"
+            alt="back of the card"
+          />
+        </div>
+      </section>
+    </section>
+    <input
+      type="button"
+      value="new game"
+      onClick="document.location.reload(true)"
+      class="newGame"
+    />
+    <script src="./script.js"></script>
+  </body>
+</html>
