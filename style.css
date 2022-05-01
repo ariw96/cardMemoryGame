@@ -57,7 +57,9 @@ header {
   background: #12212e;
   backface-visibility: hidden;
 }
-
+.back-face {
+  background: url("./img/card-back.jpg") no-repeat center center/cover;
+}
 .front-face {
   transform: rotateY(180deg);
 }
