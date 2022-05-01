@@ -96,6 +96,10 @@ setInterval(updateCountDown, 1000);
 function updateCountDown() {
     const minutes = Math.floor(time / 60);
     let seconds = time % 60;
+    if (minutes === 0 && seconds === 0) {
+        alert('time is up')
+        location.reload();
+    }
     seconds = seconds < 10 ? '0' + seconds : seconds;
     countDown.innerHTML = `${minutes}` + `:${seconds}`;
     time--;
