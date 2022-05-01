@@ -11,6 +11,7 @@ let wrong = 0;
 let score = 0;
 const highScore = window.localStorage.getItem("highScore") || 0;
 
+
 // Difficulty button event listener, On Activation it sets the grid size
 difficultsArray.forEach((btn) => {
   btn.addEventListener("click", (event) => {
@@ -45,35 +46,35 @@ function generateBoard() {
 }
 // this flips the card
 function flipCard() {
-  if (lockBoard) return;
-  if (this === firstCard) return;
+    if (lockBoard) return;
+    if (this === firstCard) return;
 
-  this.classList.add("flip");
+    this.classList.add("flip");
 
-  if (!hasFlippedCard) {
-    hasFlippedCard = true;
-    firstCard = this;
+    if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
 
-    return;
-  }
+        return;
+    }
 
-  secondCard = this;
-  checkForMatch();
+    secondCard = this;
+    checkForMatch();
 }
 // this function updates all text in the website
 function updatetext() {
-  const correctText = document.querySelector(".correct");
-  const wrongText = document.querySelector(".wrong");
-  const scoreText = document.querySelector(".score");
-  const highScoreText = document.querySelector(".high-score");
-  correctText.innerText = `Correct Guesses:${correct}`;
-  wrongText.innerText = `Wrong Guesses:${wrong}`;
-  scoreText.innerText = `Score:${score}`;
-  highScoreText.innerText = `High Score:${highScore}`;
+    const correctText = document.querySelector(".correct");
+    const wrongText = document.querySelector(".wrong");
+    const scoreText = document.querySelector(".score");
+    const highScoreText = document.querySelector(".high-score");
+    correctText.innerText = `Correct Guesses:${correct}`;
+    wrongText.innerText = `Wrong Guesses:${wrong}`;
+    scoreText.innerText = `Score:${score}`;
+    highScoreText.innerText = `High Score:${highScore}`;
 }
 // this function sets the localStorage high score
 function setHighScore() {
-  if (score > highScore) window.localStorage.setItem("highScore", score);
+    if (score > highScore) window.localStorage.setItem("highScore", score);
 }
 // this function checks for a match between the 2 selected cards if true adds to correct guesses if not adds to wrong guesses
 function checkForMatch() {
@@ -104,13 +105,31 @@ function onWrong() {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
 
-    resetSelection();
-  }, 1500);
+        resetSelection();
+    }, 1500);
 }
 // this function resets the selection of the 2 cards
 function resetSelection() {
-  [hasFlippedCard, lockBoard] = [false, false];
-  [firstCard, secondCard] = [null, null];
+    [hasFlippedCard, lockBoard] = [false, false];
+    [firstCard, secondCard] = [null, null];
+}
+// countDown function
+const startMinutes = 5;
+let time = startMinutes * 60
+const countDownEl = document.getElementById('countDown');
+
+setInterval(updateCountDown, 1000);
+
+function updateCountDown() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    if (minutes === 0 && seconds === 0) {
+        alert('time is up')
+        location.reload();
+    }
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    countDown.innerHTML = `${minutes}` + `:${seconds}`;
+    time--;
 }
 // this function shuffles the board
 function shuffle() {
