@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
 
     <title>Memory Game</title>
 
     <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./imgs.css" />
-<body>
+    <link rel="stylesheet" href="./imgs.css" />
+  </head>
+  <body>
     <header>
-        <h1>Welcome to our Memory Game</h1>
-        <p id="countDown">5:00</p>
+      <div class="info-container">
+        <h3 class="countDown">Timer: 0:00</h3>
+        <h3 class="correct">Correct Guesses: 0</h3>
+        <h3 class="wrong">Wrong Guesses: 0</h3>
+        <h3 class="score">Score: 0</h3>
+        <h3 class="high-score">High Score: 0</h3>
+      </div>
+      <button onClick="document.location.reload(true)">New Game</button>
     </header>
-    <section class="main">
-      <button class="difficult easy">Easy</button>
-      <button class="difficult medium">Medium</button>
-      <button class="difficult hard">Hard</button>
-      <nav>
-        <h3 class="correct">Correct Guesses:0</h3>
-        <h3 class="wrong">Wrong Guesses:0</h3>
-        <h3 class="score">Score:0</h3>
-        <h3 class="high-score">High Score:0</h3>
-      </nav>
-      <section class="memory-game">
-      </section>
+    <section class="start-screen">
+      <div class="window">
+        <h2>Welcome to our Memory Game</h2>
+        <h3>Select your difficulty</h3>
+        <div class="btns-container">
+          <button class="difficult easy">Easy</button>
+          <button class="difficult medium">Medium</button>
+          <button class="difficult hard">Hard</button>
+        </div>
+      </div>
     </section>
-    <input
-      type="button"
-      value="new game"
-      onClick="document.location.reload(true)"
-      class="newGame"
-    />
+    <section class="end-screen">
+      <div class="window">
+        <h3 class="countDown">Timer:</h3>
+        <h3 class="correct">Correct Guesses: 0</h3>
+        <h3 class="wrong">Wrong Guesses: 0</h3>
+        <h3 class="score">Score: 0</h3>
+        <h3 class="high-score">High Score: 0</h3>
+        <button onClick="document.location.reload(true)">New Game</button>
+      </div>
+    </section>
+    <section class="main">
+      <section class="memory-game"></section>
+    </section>
     <script src="./script.js"></script>
   </body>
 </html>

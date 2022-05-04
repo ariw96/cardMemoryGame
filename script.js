@@ -1,6 +1,9 @@
 const newGame = document.querySelector(".newGame");
 const difficultsArray = [...document.querySelectorAll(".difficult")];
 let cards = document.querySelectorAll(".memory-card");
+const board = document.querySelector(".memory-game");
+const startscreen = document.querySelector(".start-screen");
+const endscreen = document.querySelector(".end-screen");
 
 let selected = "";
 let hasFlippedCard = false;
@@ -11,7 +14,20 @@ let wrong = 0;
 let score = 0;
 const highScore = window.localStorage.getItem("highScore") || 0;
 
+const countDownEl = document.querySelectorAll(".countDown");
+let timerID;
 
+let time = 0;
+updatetext();
+function updateCountDown() {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  countDownEl.forEach((element) => {
+    element.innerText = `Timer: ${minutes}` + `:${seconds}`;
+  });
+  time++;
+}
 // Difficulty button event listener, On Activation it sets the grid size
 difficultsArray.forEach((btn) => {
   btn.addEventListener("click", (event) => {
@@ -22,6 +38,14 @@ difficultsArray.forEach((btn) => {
         ? 9
         : 12;
     generateBoard();
+    time = 0;
+    clearInterval(timerID);
+    timerID = setInterval(updateCountDown, 1000);
+    startscreen.style.opacity = "0";
+    setTimeout(() => {
+      startscreen.style.display = "none";
+    }, 600);
+    board.className = `memory-game ${event.target.classList[1]}`;
   });
 });
 
@@ -38,7 +62,7 @@ function generateBoard() {
       backFace.className = `back-face`;
       card.append(frontFace, backFace);
       card.addEventListener("click", flipCard);
-      document.querySelector(".memory-game").append(card);
+      board.append(card);
     }
   }
   cards = document.querySelectorAll(".memory-card");
@@ -46,35 +70,46 @@ function generateBoard() {
 }
 // this flips the card
 function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
+  if (lockBoard) return;
+  if (this === firstCard) return;
 
-    this.classList.add("flip");
+  this.classList.add("flip");
 
-    if (!hasFlippedCard) {
-        hasFlippedCard = true;
-        firstCard = this;
+  if (!hasFlippedCard) {
+    hasFlippedCard = true;
+    firstCard = this;
 
-        return;
-    }
+    return;
+  }
 
-    secondCard = this;
-    checkForMatch();
+  secondCard = this;
+  checkForMatch();
 }
 // this function updates all text in the website
 function updatetext() {
-    const correctText = document.querySelector(".correct");
-    const wrongText = document.querySelector(".wrong");
-    const scoreText = document.querySelector(".score");
-    const highScoreText = document.querySelector(".high-score");
-    correctText.innerText = `Correct Guesses:${correct}`;
-    wrongText.innerText = `Wrong Guesses:${wrong}`;
-    scoreText.innerText = `Score:${score}`;
-    highScoreText.innerText = `High Score:${highScore}`;
+  const correctText = document.querySelectorAll(".correct");
+  const wrongText = document.querySelectorAll(".wrong");
+  const scoreText = document.querySelectorAll(".score");
+  const highScoreText = document.querySelectorAll(".high-score");
+  correctText.forEach((element) => {
+    element.innerText = `Correct Guesses: ${correct}`;
+  });
+  wrongText.forEach((element) => {
+    element.innerText = `Wrong Guesses: ${wrong}`;
+  });
+  scoreText.forEach((element) => {
+    element.innerText = `Score: ${score}`;
+  });
+  highScoreText.forEach((element) => {
+    element.innerText = `High Score: ${highScore}`;
+  });
 }
 // this function sets the localStorage high score
 function setHighScore() {
-    if (score > highScore) window.localStorage.setItem("highScore", score);
+  if (score > highScore) {
+    window.localStorage.setItem("highScore", score);
+    highScore = score;
+  }
 }
 // this function checks for a match between the 2 selected cards if true adds to correct guesses if not adds to wrong guesses
 function checkForMatch() {
@@ -91,9 +126,10 @@ function onCorrect() {
   correct++;
   score += 100;
   resetSelection();
-  if (correct === 6) {
-    newGame.style.display = "inline-block";
+  if (correct === selected) {
     setHighScore();
+    clearInterval(timerID);
+    endscreen.style.display = "flex";
   }
 }
 // this function runs in case there isn't a match
@@ -105,32 +141,15 @@ function onWrong() {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
 
-        resetSelection();
-    }, 1500);
+    resetSelection();
+  }, 1500);
 }
 // this function resets the selection of the 2 cards
 function resetSelection() {
-    [hasFlippedCard, lockBoard] = [false, false];
-    [firstCard, secondCard] = [null, null];
+  [hasFlippedCard, lockBoard] = [false, false];
+  [firstCard, secondCard] = [null, null];
 }
 // countDown function
-const startMinutes = 5;
-let time = startMinutes * 60
-const countDownEl = document.getElementById('countDown');
-
-setInterval(updateCountDown, 1000);
-
-function updateCountDown() {
-    const minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-    if (minutes === 0 && seconds === 0) {
-        alert('time is up')
-        location.reload();
-    }
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-    countDown.innerHTML = `${minutes}` + `:${seconds}`;
-    time--;
-}
 // this function shuffles the board
 function shuffle() {
   cards.forEach((card) => {
